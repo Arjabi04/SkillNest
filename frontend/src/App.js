@@ -1,19 +1,19 @@
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SignupForm from "./components/SignupForm";
-// import LoginForm from "./components/LoginForm";
+import LoginForm from "./components/LoginForm";
 
 function App() {
   return (
-    <div>
-      <h1 style={{
-    display: "flex",
-    justifyContent: "center", // horizontal center
-    alignItems: "center",     // vertical center
-  }}>SkillNest Auth Test</h1>
-      <SignupForm />
-      {/* <LoginForm /> */}
-    </div>
+    <Router>
+      <div>
+        <h1 style={{ textAlign: "center" }}>SkillNest</h1>
+        <Routes>
+          <Route path="/signup" element={<SignupForm />} />
+          <Route path="/login" element={<LoginForm />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
-
 
 export default App;

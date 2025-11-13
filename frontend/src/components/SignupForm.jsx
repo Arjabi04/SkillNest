@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { signup } from "../api/auth";
+import { Link } from "react-router-dom"; // for routing
 
 export default function SignupForm() {
   const [form, setForm] = useState({ username: "", email: "", password: "" });
@@ -54,12 +55,18 @@ export default function SignupForm() {
           Sign Up
         </button>
       </form>
+
+      {/* Helper text with route to login */}
+      <p style={styles.helperText}>
+        Already have an account? <Link to="/login">Log in</Link>
+      </p>
+
       {message && <p style={styles.message}>{message}</p>}
     </div>
   );
 }
 
-// Simple inline styling (you can move to CSS/SCSS later)
+// Styling
 const styles = {
   container: {
     maxWidth: "400px",
@@ -100,5 +107,9 @@ const styles = {
     fontWeight: "bold",
     color: "#ff5722",
   },
+  helperText: {
+    marginTop: "0.5rem",
+    fontSize: "0.9rem",
+    color: "#555",
+  },
 };
-
