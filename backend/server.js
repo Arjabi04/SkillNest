@@ -1,18 +1,29 @@
-require('dotenv').config()
+require('dotenv').config();
+const express = require('express');
+const connectDB = require('./config/db');
 
-const express = require('express')
+const app = express();
+app.use(express.json());
 
-//express app
-const app = express()
+let mongoClient;
 
-//routes
-app.get('/',(req,res)=>{
-    res.json({msg:'welcome to the app'})    
-})
+async function startServer() {
+  mongoClient = await connectDB(); // connect to MongoDB
 
-//listen for requests 
-app.listen(process.env.PORT,()=>{
-    console.log('listening on port 4000')
-})
+  // Routes
+  app.get('/', (req, res) => {
+    res.json({ msg: 'Welcome to the app' });
+  });
 
-process.env
+  // Example route using DB
+  app.get('/test', async (req, res) => {
+    const db = mongoClient.db("SkillNest"); // use your database
+    const collections = await db.listCollections().toArray();
+    res.json({ collections });
+  });
+
+  const PORT = process.env.PORT || 4000;
+  app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
+}
+
+startServer();
