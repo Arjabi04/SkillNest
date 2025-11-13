@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const connectDB = require('./config/db');
 const signupRoute = require('./routes/signup');
+const loginRoute = require('./routes/login');
 
 const app = express();
 app.use(express.json());
@@ -18,7 +19,8 @@ async function startServer() {
 
   // Signup route
 app.use('/api/signup', signupRoute);
-
+// Login route
+app.use('/api/login', loginRoute);
 
   // Example route using DB
 //   app.get('/test', async (req, res) => {
