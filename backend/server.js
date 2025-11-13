@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const connectDB = require('./config/db');
+const signupRoute = require('./routes/signup');
 
 const app = express();
 app.use(express.json());
@@ -15,12 +16,16 @@ async function startServer() {
     res.json({ msg: 'Welcome to the app' });
   });
 
+  // Signup route
+app.use('/api/signup', signupRoute);
+
+
   // Example route using DB
-  app.get('/test', async (req, res) => {
-    const db = mongoClient.db("SkillNest"); // use your database
-    const collections = await db.listCollections().toArray();
-    res.json({ collections });
-  });
+//   app.get('/test', async (req, res) => {
+//     const db = mongoClient.db("SkillNest");
+//     const collections = await db.listCollections().toArray();
+//     res.json({ collections });
+//   });
 
   const PORT = process.env.PORT || 4000;
   app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
