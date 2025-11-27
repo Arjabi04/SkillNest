@@ -6,10 +6,10 @@ function App() {
   return (
     <Router>
       <div>
-        <h1 style={{ textAlign: "center" }}>SkillNest</h1>
+        {/* <h1 style={{ textAlign: "center" }}>SkillNest</h1> */}
 
         <Routes>
-          
+
           {/* Default route → send user to login */}
           <Route path="/" element={<Navigate to="/login" replace />} />
 
