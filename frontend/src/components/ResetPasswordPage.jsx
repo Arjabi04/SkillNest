@@ -1,7 +1,7 @@
 // src/components/ResetPasswordPage.jsx
 import { useState } from "react";
 import { useParams } from "react-router-dom";
-import "./LoginForm.css"; // reuse your CSS for inputs/buttons
+import "./ResetPassword.css"; 
 
 export default function ResetPasswordPage() {
   const { token } = useParams(); // get token from URL
@@ -26,24 +26,26 @@ export default function ResetPasswordPage() {
   };
 
   return (
-    <div className="login-page">
-      <div className="login-container">
-        <h1 className="skillnest-text">SkillNest</h1>
-        <div className="form-wrapper">
-          <h2 className="login-heading">Reset Password</h2>
-          <form className="login-form" onSubmit={handleSubmit}>
-            <input
-              type="password"
-              placeholder="Enter new password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <button type="submit">Reset Password</button>
-          </form>
-          {message && <p className="login-message">{message}</p>}
-        </div>
-      </div>
+  <div className="reset-page">
+    <div className="reset-container">
+      <h1 className="reset-brand">SkillNest</h1>
+
+      <h2 className="reset-heading">Reset Password</h2>
+
+      <form className="reset-form" onSubmit={handleSubmit}>
+        <input
+          type="password"
+          placeholder="Enter new password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button type="submit">Reset Password</button>
+      </form>
+
+      {message && <p className="reset-message">{message}</p>}
     </div>
-  );
+  </div>
+);
+
 }
