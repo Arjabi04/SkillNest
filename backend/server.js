@@ -3,6 +3,7 @@ const express = require('express');
 const connectDB = require('./config/db');
 const signupRoute = require('./routes/signup');
 const loginRoute = require('./routes/login');
+const forgotPasswordRoute = require('./routes/forgotPassword');
 const cors = require('cors');
 
 const app = express();
@@ -29,6 +30,10 @@ async function startServer() {
 app.use('/api/signup', signupRoute);
 // Login route
 app.use('/api/login', loginRoute);
+
+// forgot pass route
+app.use('/api/forgot-password', forgotPasswordRoute);
+
 
   // Example route using DB
 //   app.get('/test', async (req, res) => {
