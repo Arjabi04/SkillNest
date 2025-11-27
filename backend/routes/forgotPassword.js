@@ -11,8 +11,10 @@ router.post('/', async (req, res) => {
 
   try {
     const user = await User.findOne({ email });
+
     if (!user) {
-      return res.status(200).json({ msg: 'If the email exists, a reset link has been sent.' });
+      // Email does not exist in DB
+      return res.status(404).json({ msg: 'Email does not exist.' });
     }
 
     // Generate a token
@@ -25,14 +27,13 @@ router.post('/', async (req, res) => {
 
     // Send email
     const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST,       // Mailtrap host
-  port: process.env.EMAIL_PORT,       // Mailtrap port
-  auth: {
-    user: process.env.EMAIL_USER,     // Mailtrap username
-    pass: process.env.EMAIL_PASSWORD  // Mailtrap password
-  }
-});
-
+      host: process.env.EMAIL_HOST,       // Mailtrap host
+      port: process.env.EMAIL_PORT,       // Mailtrap port
+      auth: {
+        user: process.env.EMAIL_USER,     // Mailtrap username
+        pass: process.env.EMAIL_PASSWORD  // Mailtrap password
+      }
+    });
 
     const resetUrl = `http://localhost:3000/reset-password/${token}`;
 
@@ -45,7 +46,7 @@ router.post('/', async (req, res) => {
 
     await transporter.sendMail(mailOptions);
 
-    res.json({ msg: 'If the email exists, a reset link has been sent.' });
+    res.json({ msg: 'Reset link has been sent to your email.' });
   } catch (err) {
     console.error(err);
     res.status(500).json({ msg: 'Server error' });
