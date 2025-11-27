@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import SignupForm from "./components/SignupForm";
 import LoginForm from "./components/LoginForm";
+import ResetPasswordPage from "./components/ResetPasswordPage";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
 
           <Route path="/signup" element={<SignupForm />} />
           <Route path="/login" element={<LoginForm />} />
+          <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
         </Routes>
       </div>
     </Router>
