@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { login } from "../api/auth";
 import { Link } from "react-router-dom";
-import "./LoginForm.css"; // import CSS
+import "./Login.css"; // import CSS
 import loginImage from "../assets/login-image.jpg"; // put your image in assets folder
 
 export default function LoginPage() {
@@ -56,7 +56,7 @@ export default function LoginPage() {
         required
       />
        <p className="forgot-password">
-       <Link to="/signup">Forgot password?</Link>
+       <Link to="/forgot-password">Forgot password?</Link>
     </p>
       <button type="submit">Login</button>
     </form>
