@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import "./ChooseInterests.css"; // external CSS file
 
 export default function ChooseInterests() {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
-  const userId = params.get("userId"); // get userId from URL
+  const userId = params.get("userId");
 
   const [selectedInterests, setSelectedInterests] = useState([]);
   const [message, setMessage] = useState("");
@@ -17,7 +18,18 @@ export default function ChooseInterests() {
     "Music",
     "Traveling",
     "Gaming",
-    "Fitness"
+    "Fitness",
+    "Writing",
+    "Dancing",
+    "Gardening",
+    "Cycling",
+    "Drawing",
+    "Crafting",
+    "Coding",
+    "Blogging",
+    "Yoga",
+    "Meditation",
+    "Entrepreneurship"
   ];
 
   const toggleHobby = (hobby) => {
@@ -30,49 +42,60 @@ export default function ChooseInterests() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (!userId) {
       setMessage("User ID missing.");
       return;
     }
+
+    if (selectedInterests.length === 0) {
+      setMessage("Please select at least one interest.");
+      return;
+    }
+
     try {
       const res = await fetch("http://localhost:4000/api/interests", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userId, interests: selectedInterests })
       });
+
       const data = await res.json();
-      setMessage(data.msg);
+      setMessage(data.msg || "Your interests have been saved!");
     } catch (err) {
       console.error(err);
-      setMessage("Something went wrong.");
-      console.log({ userId, selectedInterests });
-
+      setMessage("Something went wrong. Please try again.");
     }
   };
 
   return (
-    <div style={{ maxWidth: "400px", margin: "3rem auto", textAlign: "center" }}>
-      <h2>Choose Your Interests</h2>
+    <div className="interests-container">
+      <h2>Welcome to SkillNest!</h2>
+      <p className="subtitle">
+        Select the hobbies and interests you love. You can always come back and change them anytime.
+      </p>
       <form onSubmit={handleSubmit}>
-        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", justifyContent: "center" }}>
+        <div className="interests-grid">
           {InterestsList.map((hobby) => (
-            <label key={hobby} style={{ border: "1px solid #ccc", padding: "0.5rem 1rem", borderRadius: "8px", cursor: "pointer" }}>
+            <label
+              key={hobby}
+              className={`interest-card ${selectedInterests.includes(hobby) ? "selected" : ""}`}
+            >
               <input
                 type="checkbox"
                 value={hobby}
                 checked={selectedInterests.includes(hobby)}
                 onChange={() => toggleHobby(hobby)}
-                style={{ marginRight: "0.5rem" }}
               />
               {hobby}
             </label>
           ))}
         </div>
-        <button type="submit" style={{ marginTop: "1rem", padding: "0.75rem 1.5rem", backgroundColor: "#4c5eafff", color: "white", border: "none", borderRadius: "8px" }}>
-          Save Interests
+        <button type="submit" className="submit-btn">
+          Save & Continue
         </button>
       </form>
-      {message && <p style={{ marginTop: "1rem" }}>{message}</p>}
+      {message && <p className="message">{message}</p>}
     </div>
   );
 }
