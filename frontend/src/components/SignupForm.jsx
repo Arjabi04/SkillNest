@@ -1,15 +1,16 @@
 import { useState } from "react";
 import { signup } from "../api/auth";
-import { Link } from "react-router-dom";
+
+import { Link, useNavigate } from "react-router-dom";
 import "./SignupForm.css"; // import CSS
 
 
 export default function SignupForm() {
   const [form, setForm] = useState({ username: "", email: "", password: "" });
   const [message, setMessage] = useState("");
+  const navigate = useNavigate(); // for redirecting
 
-  const handleChange = (e) =>
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,6 +18,15 @@ export default function SignupForm() {
       const data = await signup(form.username, form.email, form.password);
       setMessage(`🎉 Welcome, ${data.user.username}!`);
       setForm({ username: "", email: "", password: "" });
+
+
+      // redirect to choose hobbies page for new users only
+if (data.isNew) {
+  navigate(`/choose-hobbies?userId=${data.user._id}`); // use _id, not id
+}
+
+
+
     } catch (err) {
       setMessage("⚠️ Signup failed. Try again.");
     }
