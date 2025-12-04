@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { signup } from "../api/auth";
+
 import { Link, useNavigate } from "react-router-dom";
 import "./SignupForm.css"; // import CSS
 
@@ -18,10 +19,12 @@ export default function SignupForm() {
       setMessage(`🎉 Welcome, ${data.user.username}!`);
       setForm({ username: "", email: "", password: "" });
 
+
       // redirect to choose hobbies page for new users only
 if (data.isNew) {
   navigate(`/choose-hobbies?userId=${data.user._id}`); // use _id, not id
 }
+
 
 
     } catch (err) {
