@@ -20,10 +20,19 @@ router.post('/', async (req, res) => {
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-    res.json({ token, user: { id: user._id, username, email } });
+    return res.json({ 
+      user: { id: user._id, username, email }, 
+      token, 
+      user: {
+    _id: user._id,       
+    username: user.username,
+    email: user.email
+  },
+      isNew: true  // flag for new users
+    });
   } catch (err) {
     console.error(err.message);
-    res.status(500).send("Server error");
+    return res.status(500).send("Server error");
   }
 });
 
