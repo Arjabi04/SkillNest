@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
-import "./ChooseInterests.css"; // external CSS file
+import { useLocation, useNavigate } from "react-router-dom"; // import useNavigate
+import "./ChooseInterests.css";
 
 export default function ChooseInterests() {
   const location = useLocation();
+  const navigate = useNavigate(); // initialize navigate
   const params = new URLSearchParams(location.search);
   const userId = params.get("userId");
 
@@ -11,25 +12,10 @@ export default function ChooseInterests() {
   const [message, setMessage] = useState("");
 
   const InterestsList = [
-    "Cooking",
-    "Painting",
-    "Photography",
-    "Reading",
-    "Music",
-    "Traveling",
-    "Gaming",
-    "Fitness",
-    "Writing",
-    "Dancing",
-    "Gardening",
-    "Cycling",
-    "Drawing",
-    "Crafting",
-    "Coding",
-    "Blogging",
-    "Yoga",
-    "Meditation",
-    "Entrepreneurship"
+    "Cooking", "Painting", "Photography", "Reading", "Music",
+    "Traveling", "Gaming", "Fitness", "Writing", "Dancing",
+    "Gardening", "Cycling", "Drawing", "Crafting", "Coding",
+    "Blogging", "Yoga", "Entrepreneurship"
   ];
 
   const toggleHobby = (hobby) => {
@@ -54,14 +40,23 @@ export default function ChooseInterests() {
     }
 
     try {
-      const res = await fetch("http://localhost:4000/api/interests", {
+      const res = await fetch("http://localhost:4000/api/interests", { // make sure route matches backend
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ userId, interests: selectedInterests })
       });
 
       const data = await res.json();
-      setMessage(data.msg || "Your interests have been saved!");
+
+      if (res.ok) {
+        setMessage(data.msg || "Your interests have been saved!");
+        // Redirect to user profile after 1 second
+        setTimeout(() => {
+          navigate(`/profile?userId=${userId}`);
+        }, 1000);
+      } else {
+        setMessage(data.msg || "Something went wrong.");
+      }
     } catch (err) {
       console.error(err);
       setMessage("Something went wrong. Please try again.");

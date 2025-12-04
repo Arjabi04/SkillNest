@@ -13,22 +13,27 @@ body, html {
   margin: 3rem auto;
   text-align: center;
   font-family: 'Arial', sans-serif;
-  min-height: 100vh;           /* full viewport height */
+  min-height: 70vh;           /* full viewport height */
   display: flex;
   flex-direction: column;
+    background-color: rgba(216, 212, 212, 0.097); /* white with 50% transparency */
+  padding: 2rem 2rem;           /* add some padding inside */
+  border-radius: 15px;          /* optional: round the container edges */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.39); /* subtle shadow for depth */
+  
   
 }
 
 
 h2 {
     font-size: 2.2rem; 
-    color: rgba(126, 145, 232, 0.916);
+    color: rgba(234, 237, 250, 0.916);
     font-weight: 700;
 }
 .subtitle {
     font-size: 1.rem;
     margin-bottom: 2rem;      /* space between subtitle and hobbies */
-    color: rgba(126, 145, 232, 0.916);
+    color: rgba(243, 243, 243, 0.916);
     margin-bottom: 3rem; 
 }
 
@@ -92,5 +97,5 @@ h2 {
 .message {
   margin-top: 1rem;
   font-weight: bold;
-  color: #d9534f;
+  color: #e0e29e;
 }

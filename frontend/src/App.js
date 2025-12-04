@@ -4,6 +4,7 @@ import LoginForm from "./components/LoginForm";
 import ResetPasswordPage from "./components/ResetPasswordPage";
 import ForgotPasswordPage from "./components/ForgotPassword";
 import ChooseInterests from "./components/ChooseInterests";
+import UserProfile from "./components/UserProfile";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
           <Route path="/choose-interests" element={<ChooseInterests />} />
+          <Route path="/profile" element={<UserProfile />} />
         </Routes>
       </div>
     </Router>
