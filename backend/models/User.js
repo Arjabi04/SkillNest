@@ -6,7 +6,8 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   interests: [String],
     resetPasswordToken: { type: String },
-  resetPasswordExpires: { type: Date }
+  resetPasswordExpires: { type: Date },
+  profileImage: { type: String, default: "" }
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema);

@@ -22,7 +22,7 @@ export default function SignupForm() {
 
       // redirect to choose hobbies page for new users only
 if (data.isNew) {
-  navigate(`/choose-hobbies?userId=${data.user._id}`); // use _id, not id
+  navigate(`/choose-interests?userId=${data.user._id}`); // use _id, not id
 }
 
 

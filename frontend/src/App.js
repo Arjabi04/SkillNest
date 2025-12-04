@@ -3,7 +3,8 @@ import SignupForm from "./components/SignupForm";
 import LoginForm from "./components/LoginForm";
 import ResetPasswordPage from "./components/ResetPasswordPage";
 import ForgotPasswordPage from "./components/ForgotPassword";
-import ChooseHobbies from "./components/ChooseHobbies";
+import ChooseInterests from "./components/ChooseInterests";
+import UserProfile from "./components/UserProfile";
 
 function App() {
   return (
@@ -21,7 +22,8 @@ function App() {
 
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
-          <Route path="/choose-hobbies" element={<ChooseHobbies />} />
+          <Route path="/choose-interests" element={<ChooseInterests />} />
+          <Route path="/profile" element={<UserProfile />} />
         </Routes>
       </div>
     </Router>
