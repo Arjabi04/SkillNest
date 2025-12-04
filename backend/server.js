@@ -5,6 +5,8 @@ const signupRoute = require('./routes/signup');
 const loginRoute = require('./routes/login');
 const forgotPasswordRoute = require('./routes/forgotPassword');
 const hobbiesRoute = require('./routes/interests');
+const profileRoute = require("./routes/profile");
+
 
 
 const cors = require('cors');
@@ -39,7 +41,7 @@ app.use('/api/login', loginRoute);
 app.use('/api/forgot-password', forgotPasswordRoute);
 app.use('/api/interests', hobbiesRoute);
 
-
+app.use("/api/profile", profileRoute);
 
   // Example route using DB
 //   app.get('/test', async (req, res) => {
